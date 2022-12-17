@@ -1,5 +1,3 @@
-import "./App.css";
-import Home from "./Home";
 import { worker } from "./mocks/worker";
 import BaseRoute from "./Route";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -13,9 +11,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <QueryClientProvider client={queryClient}>
-        <div className="App bg-green-500">
-          <BaseRoute />
-        </div>
+        <BaseRoute />
       </QueryClientProvider>
     </ApolloProvider>
   );

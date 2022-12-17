@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@fullcalendar/core": "^6.0.0",
+    "@fullcalendar/daygrid": "^6.0.0",
     "apollo-boost": "^0.4.9",
     "graphql": "^16.6.0",
     "react": "^18.2.0",

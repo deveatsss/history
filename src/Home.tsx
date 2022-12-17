@@ -1,19 +1,21 @@
 import { useQuery } from "react-query";
-
-async function fetchTodo() {
-  return await fetch("/todos").then((response) => response.json());
-}
+import { Calendar } from "@fullcalendar/core";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import { useEffect } from "react";
 
 function Home() {
-  const { data, isLoading } = useQuery("todos", fetchTodo);
+  useEffect(() => {
+    let calendarEl: HTMLElement = document.getElementById("calendar")!;
 
-  console.log(data);
+    let calendar = new Calendar(calendarEl, {
+      plugins: [dayGridPlugin],
+      // options here
+    });
 
-  if (isLoading) {
-    return <div>Loading..</div>;
-  }
+    calendar.render();
+  }, []);
 
-  return <div className="App">Hello world~</div>;
+  return <div id="calendar" />;
 }
 
 export default Home;
