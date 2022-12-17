@@ -57,3 +57,7 @@ calendar > tui
   - jest
   - ci/cd
   - tailwind
+
+## 참고
+
+- [tailwind 사용법](https://wonny.space/writing/dev/hello-tailwind-css)
