@@ -15,7 +15,14 @@ function Home() {
     calendar.render();
   }, []);
 
-  return <div id="calendar" />;
+  const onCreateTask = () => {};
+
+  return (
+    <div>
+      <button onClick={onCreateTask}>create task</button>
+      <div id="calendar" />
+    </div>
+  );
 }
 
 export default Home;
