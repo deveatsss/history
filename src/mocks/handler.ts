@@ -61,13 +61,13 @@ export const handlers = [
   }),
 
   rest.post("/task", (req: { body: CreateTask }, res, ctx) => {
-    const { title, description, creator, placeName } = req.body;
+    const { title, description, creator, placeName, createdDt } = req.body;
     const task: Task = {
       id: uuid(),
       title,
       description,
       creator,
-      createdDt: new Date(),
+      createdDt,
       placeName,
       coordinate: {
         latitude: 20.20202,

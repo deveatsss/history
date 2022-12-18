@@ -11,7 +11,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <QueryClientProvider client={queryClient}>
-        <BaseRoute />
+          <div className="bg-amber-300">asdfasd</div>
+        <BaseRoute/>
+        <div id="modal-root"></div>
       </QueryClientProvider>
     </ApolloProvider>
   );

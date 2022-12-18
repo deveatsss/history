@@ -20,6 +20,6 @@ declare global {
 
   type CreateTask = Pick<
     Task,
-    "title" | "description" | "creator" | "placeName"
+    "title" | "description" | "creator" | "placeName" | 'createdDt'
   >;
 }
