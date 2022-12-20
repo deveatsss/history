@@ -10,8 +10,8 @@ const tasks: Task[] = [
     createdDt: new Date("2022-11-06"),
     placeName: "후라토 식당",
     coordinate: {
-      latitude: 20.20202,
-      longitude: 404.04,
+      latitude: 37.57469330693263,
+      longitude: 126.97329836565751,
     },
     editedDt: new Date(),
     status: "active",
@@ -24,8 +24,8 @@ const tasks: Task[] = [
     createdDt: new Date("2022-12-18"),
     placeName: "라향각 마라탕",
     coordinate: {
-      latitude: 20.20202,
-      longitude: 404.04,
+      latitude: 37.608398,
+      longitude: 127.007812,
     },
     editedDt: new Date(),
     status: "active",
@@ -38,8 +38,8 @@ const tasks: Task[] = [
     createdDt: new Date("2022-11-20"),
     placeName: "에도마에텐동 하마다",
     coordinate: {
-      latitude: 20.20202,
-      longitude: 404.04,
+      latitude: 37.56905981420724,
+      longitude: 126.98636012882284,
     },
     editedDt: new Date(),
     status: "active",
