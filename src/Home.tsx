@@ -52,13 +52,20 @@ function Home() {
   const onCloseCrateTask = () => setModalOpen(false);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        padding: "20px",
+        boxSizing: "border-box",
+      }}
+    >
       <button onClick={onCreateTask}>create task</button>
 
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <div id="calendar" style={{ width: "80%", flex: 1 }} />
+        <div id="calendar" style={{ flex: 1 }} />
       )}
       {modalOpen && (
         <ModalPortal>
