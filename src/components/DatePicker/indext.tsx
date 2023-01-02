@@ -1,16 +1,28 @@
-import React, {useState} from "react";
-import ReactDatePicker from "react-datepicker";
+import React from "react";
+import ReactDatePicker, {ReactDatePickerProps} from "react-datepicker";
+import {Controller, UseFormReturn} from "react-hook-form";
 import "react-datepicker/dist/react-datepicker.css";
-import {UseFormRegister} from "react-hook-form/dist/types/form";
 
-type Props = UseFormRegister<any>;
+interface Props extends Partial<ReactDatePickerProps>,
+    Partial<Pick<HTMLInputElement, 'className'>>,
+    Pick<UseFormReturn, 'control'>{
+    name: string;
+    date?: Date;
+}
 
-const DatePicker: React.FC<Props> = ({ ...rest }) => {
-    const [date, setDate] = useState(new Date());
-    const handleChange = (val:Date) => setDate(val);
-
+const DatePicker: React.FC<Props> = ({name, date = new Date(), control,...rest}) => {
     return (
-        <ReactDatePicker selected={date} onChange={handleChange} {...rest} />
+        <Controller
+            name={name}
+            control={control}
+            defaultValue={date}
+            render={({ field: {onChange, value} }) => (
+                <ReactDatePicker
+                    selected={value}
+                    onChange={onChange}
+                    dateFormat='yyyy.MM.dd'
+                    {...rest} />
+            )} />
     )
 }
 
