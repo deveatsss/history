@@ -18,20 +18,6 @@ const tasks: Task[] = [
   },
   {
     id: uuid(),
-    title: "마라탕",
-    description: "맛있는 마라탕을 먹었디.",
-    creator: "dobby",
-    createdDt: new Date("2022-12-18"),
-    placeName: "라향각 마라탕",
-    coordinate: {
-      latitude: 37.608398,
-      longitude: 127.007812,
-    },
-    editedDt: new Date(),
-    status: "active",
-  },
-  {
-    id: uuid(),
     title: "텐동",
     description: "맛있는 텐동을 먹었디.",
     creator: "dobby",
@@ -40,6 +26,20 @@ const tasks: Task[] = [
     coordinate: {
       latitude: 37.56905981420724,
       longitude: 126.98636012882284,
+    },
+    editedDt: new Date(),
+    status: "active",
+  },
+  {
+    id: uuid(),
+    title: "마라탕",
+    description: "맛있는 마라탕을 먹었디.",
+    creator: "dobby",
+    createdDt: new Date("2022-12-18"),
+    placeName: "라향각 마라탕",
+    coordinate: {
+      latitude: 37.608398,
+      longitude: 127.007812,
     },
     editedDt: new Date(),
     status: "active",

@@ -9,8 +9,10 @@ import CreateTaskModal from "./components/CreateTaskModal";
 
 function Home() {
   const [modalOpen, setModalOpen] = useState(false);
+  const onCloseCrateTask = () => setModalOpen(false);
+
   const navigate = useNavigate();
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, refetch } = useQuery(
     ["task", "list"],
     async () =>
       await fetch("/task/list").then(
@@ -39,6 +41,18 @@ function Home() {
         initialView: "dayGridMonth",
         plugins: [interactionPlugin, dayGridPlugin],
         editable: true,
+        customButtons: {
+          addTask: {
+            text: 'add task',
+            click() {
+              setModalOpen(true)
+            }
+          }
+        },
+        headerToolbar: {
+          left: 'title',
+          right: 'addTask,today,prev,next'
+        },
         events: events,
         eventClick: (info) => onNavigateDetailPage(info.event.id),
         // @ts-ignore
@@ -46,10 +60,7 @@ function Home() {
       });
       calendar.render();
     }
-  }, [isLoading]);
-
-  const onCreateTask = () => setModalOpen(true);
-  const onCloseCrateTask = () => setModalOpen(false);
+  }, [isLoading, data]);
 
   return (
     <div
@@ -60,16 +71,14 @@ function Home() {
         boxSizing: "border-box",
       }}
     >
-      <button onClick={onCreateTask}>create task</button>
-
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <div id="calendar" style={{ flex: 1 }} />
+          <div id="calendar" style={{ flex: 1, position: 'relative' }} />
       )}
       {modalOpen && (
         <ModalPortal>
-          <CreateTaskModal onClose={onCloseCrateTask} />
+          <CreateTaskModal onClose={onCloseCrateTask} refetch={refetch} />
         </ModalPortal>
       )}
     </div>

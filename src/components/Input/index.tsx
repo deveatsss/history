@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-type Props = Pick<HTMLInputElement, 'className' | 'disabled' | 'placeholder' | 'type'>
+type Props = Partial<Pick<HTMLInputElement, 'className' | 'disabled' | 'placeholder' | 'type'>>
 const Input:React.FC<Props> = (props) => {
     const {className, disabled, placeholder, type} = props;
     const [value, setValue] = useState('');
