@@ -12,16 +12,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <QueryClientProvider client={queryClient}>
-        <Background />
         <div
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
+            position: 'relative',
+            padding: '50px',
             width: "100vw",
             height: "100%",
           }}
         >
+          {/*<Background />*/}
           <BaseRoute />
         </div>
         <div id="modal-root"></div>

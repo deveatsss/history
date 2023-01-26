@@ -1,12 +1,16 @@
 import dayjs from "dayjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import ModalPortal from './components/ModalPortal';
+import CreateTaskModal from './components/CreateTaskModal';
 
 function Detail() {
   const { id } = useParams<{ id: string }>();
+  const [modalOpen, setModalOpen] = useState(false);
+  const onCloseCrateTask = () => setModalOpen(false);
 
-  const { isLoading, data } = useQuery(
+  const { isLoading, data, refetch } = useQuery(
     ["task", "detail", id],
     async () =>
       await fetch(`/task/${id}`).then(
@@ -65,14 +69,21 @@ function Detail() {
       }}
     >
       <div style={{ width: "80%" }} className="py-7 flex-col flex divide-y">
-        <div className="pt-7 pb-5 gap-2.5 flex-col flex">
-          <p className="font-sans text-4xl font-normal text-slate-700">
-            {title}
-            <span className="text-sm text-slate-600">&nbsp; by {creator}</span>
-          </p>
-          <p className="text-sm text-slate-600">
-            {dayjs(createdDt).format("YYYY-MM-DD")}
-          </p>
+        <div className="pt-7 pb-5 gap-2.5 flex">
+          <div className='flex flex-col'>
+            <p className="font-sans text-4xl font-normal text-slate-700">
+              {title}
+              <span className="text-sm text-slate-600">&nbsp; by {creator}</span>
+            </p>
+            <p className="text-sm text-slate-600">
+              {dayjs(createdDt).format("YYYY-MM-DD")}
+            </p>
+          </div>
+          <button
+            className='ml-auto border-solid border border-gray-300 text-sm h-12'
+            onChange={() => setModalOpen(true)}>
+            Edit Task
+          </button>
         </div>
         <div className="flex-col flex ">
           <div className="pt-2">{description}</div>
@@ -84,6 +95,12 @@ function Detail() {
           </div>
         </div>
       </div>
+
+      {modalOpen && (
+        <ModalPortal>
+          <CreateTaskModal type='edit' onClose={onCloseCrateTask} refetch={refetch} />
+        </ModalPortal>
+      )}
     </div>
   );
 }
