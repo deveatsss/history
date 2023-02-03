@@ -21,5 +21,5 @@ declare global {
   type CreateTask = Pick<
     Task,
     "title" | "description" | "creator" | "placeName" | 'createdDt'
-  >;
+  > & Partial<Pick<Task, 'id'>>;
 }

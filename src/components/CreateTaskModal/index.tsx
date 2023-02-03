@@ -5,15 +5,16 @@ import {useForm} from "react-hook-form";
 
 interface Props extends Pick<QueryObserverBaseResult, 'refetch'>{
     onClose: () => void;
-    type?: 'add' | 'edit';
     data?: CreateTask;
 }
 
-const CreateTaskModal:React.FC<Props> = ({type = 'add', onClose, refetch}) => {
-    const isTypeAdd = type === 'add';
+const CreateTaskModal:React.FC<Props> = ({onClose, refetch, data }) => {
+    const id = data?.id;
+    const fetchURL = `/task${id ? `/${id}` : ''}`;
+
     const { mutate } = useMutation(
         ['task'],
-        async (body: CreateTask) => await fetch('/task', {
+        async (body: CreateTask) => await fetch(fetchURL, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(body),
@@ -33,22 +34,24 @@ const CreateTaskModal:React.FC<Props> = ({type = 'add', onClose, refetch}) => {
     const inputClass = 'h-8 w-full bg-white text-black px-3 border border-solid border-gray-300 rounded text-sm';
     const textAreaClass = 'h-52 py-3 resize-none';
     const inputArray = {
-        '제목': <input {...register('title',{ required: true })} placeholder='제목' className={inputClass} />,
-        '날짜': <DatePicker name='createdDt' control={control} className={inputClass} />,
+        '제목': <input {...register('title',{ required: true })} defaultValue={data?.title} placeholder='제목' className={inputClass} />,
+        '날짜': <DatePicker date={data?.createdDt ? new Date(data?.createdDt) : new Date()} name='createdDt' control={control} className={inputClass} />,
         '작성자':
-            <select {...register('creator',{ required: true })} className={inputClass}>
-                <option>dobby</option>
-                <option>leo</option>
+            <select {...register('creator',{ required: true })} className={inputClass} defaultValue={data?.creator}>
+                {
+                    ['dobby', 'leo'].map((v) => (
+                      <option key={v}>{v}</option>
+                    ))
+                }
             </select>,
-        '장소': <input {...register('placeName',{ required: true })} placeholder='장소' className={inputClass} />,
-        '내용': <textarea {...register('description',{ required: true })} placeholder='내용' className={[inputClass, textAreaClass].join(' ')}></textarea>,
-
+        '장소': <input {...register('placeName',{ required: true })} defaultValue={data?.placeName} placeholder='장소' className={inputClass} />,
+        '내용': <textarea {...register('description',{ required: true })} defaultValue={data?.description} placeholder='내용' className={[inputClass, textAreaClass].join(' ')}></textarea>,
     };
 
     return (
         <div className='z-50 fixed inset-0 w-full h-full bg-black/[0.6] flex items-center justify-center'>
             <div className='w-[800px] bg-white py-5 px-9 rounded-md text-black'>
-                <h2 className='text-2xl font-black text-center mb-5'>{isTypeAdd ? 'Add' : 'Edit'} Task</h2>
+                <h2 className='text-2xl font-black text-center mb-5'>{id ? 'Edit' : 'Add'} Task</h2>
                 <form onSubmit={onSubmit}>
                     <table className="w-full mb-3 text-base">
                         <colgroup>

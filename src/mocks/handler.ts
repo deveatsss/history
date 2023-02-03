@@ -80,4 +80,32 @@ export const handlers = [
     tasks.push(task);
     return res(ctx.status(201));
   }),
+
+  // 태스크 디테일
+  rest.post("/task/:id", (req: { body: CreateTask, params: { id: string } }, res, ctx) => {
+    const { title, description, creator, placeName, createdDt } = req.body;
+    const { id } = req.params;
+    const task: Task = {
+      id,
+      title,
+      description,
+      creator,
+      createdDt,
+      placeName,
+      coordinate: {
+        latitude: 20.20202,
+        longitude: 404.04,
+      },
+      editedDt: new Date(),
+      status: "active",
+    };
+
+    tasks.forEach((v, i) => {
+      if (v.id === id) {
+        return tasks[i] = task;
+      }
+    });
+
+    return res(ctx.status(201));
+  }),
 ];

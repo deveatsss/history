@@ -81,7 +81,7 @@ function Detail() {
           </div>
           <button
             className='ml-auto border-solid border border-gray-300 text-sm h-12'
-            onChange={() => setModalOpen(true)}>
+            onClick={() => setModalOpen(true)}>
             Edit Task
           </button>
         </div>
@@ -98,7 +98,7 @@ function Detail() {
 
       {modalOpen && (
         <ModalPortal>
-          <CreateTaskModal type='edit' onClose={onCloseCrateTask} refetch={refetch} />
+          <CreateTaskModal data={data?.data} onClose={onCloseCrateTask} refetch={refetch} />
         </ModalPortal>
       )}
     </div>
